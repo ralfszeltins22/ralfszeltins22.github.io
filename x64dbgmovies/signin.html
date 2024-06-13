@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieGo - Sign in</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function redirectToAnotherWebsite(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            window.location.href = "error.html"; // Replace with the URL you want to redirect to
+        }
+    </script>
+</head>
+<body>
+    <div class="signin">
+        <div class="content">
+            <h2>Sign In</h2>
+            <form class="form" onsubmit="redirectToAnotherWebsite(event)">
+                <div class="inputBox">
+                    <input type="text" required />
+                    <i>Username</i>
+                </div>
+                <div class="inputBox">
+                    <input type="password" required />
+                    <i>Password</i>
+                </div>
+                <div class="links">
+                    <a href="error.html">Forgot Password</a>
+                    <a href="error.html">Signup</a>
+                </div>
+                <div class="inputBox">
+                    <input type="submit" value="Login" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

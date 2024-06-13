@@ -1,0 +1,113 @@
+/* General styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111111;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #ffffff;
+}
+
+
+/* Styling for the sign-in container */
+.signin {
+    width: 400px;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+/* Styling for the content inside the sign-in container */
+.signin .content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Styling for each input box */
+.signin .form .inputBox {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Styling for the text inputs */
+.signin .form .inputBox input {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Position and styling for the placeholder text */
+.signin .form .inputBox i {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    color: #aaa;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+/* Adjust the position of the placeholder text when the input is focused or valid */
+.signin .form .inputBox input:focus + i,
+.signin .form .inputBox input:valid + i {
+    top: -20px;
+    font-size: 12px;
+    color: #fff;
+}
+
+/* Styling for the links container */
+.signin .form .links {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Styling for the links */
+.signin .form .links a {
+    color: #aaa;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* Change link color on hover */
+.signin .form .links a:hover {
+    color: #fff;
+}
+
+/* Styling for the submit button */
+.signin .form .inputBox input[type="submit"] {
+    width: 100%;
+    background: #007bff;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 10px;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Change background color of submit button on hover */
+.signin .form .inputBox input[type="submit"]:hover {
+    background: #0056b3;
+}
