@@ -184,3 +184,7 @@ nav ul li a:hover {
 .social-links li a:hover {
     text-decoration: underline;
 }
+
+html {
+    scroll-behavior: smooth;
+}

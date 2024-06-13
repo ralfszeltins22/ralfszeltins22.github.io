@@ -111,3 +111,7 @@ body {
 .signin .form .inputBox input[type="submit"]:hover {
     background: #0056b3;
 }
+
+html {
+    scroll-behavior: smooth;
+}
