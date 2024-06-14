@@ -12,12 +12,16 @@
             <h1>MovieGo</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="error.html">Search</a></li>
-                    <li><a href="index.html">Movies</a></li>
-                    <li><a href="index.html">Genres</a></li>
-                    <li><a href="signin.html">Sign in</a></li>
-                    <li><a href="error.html">Sign up</a></li>
+                    <li><a href="/moviego/index.html">Home</a></li>
+                    <li><a href="/moviego/error.html">Search</a></li>
+                    <li><a href="/moviego/index.html">Sponsored</a></li>
+                    <li><a href="/moviego/index.html">Discover</a></li>
+                    <li id="nav-signin"><a href="/moviego/signin.html">Sign in</a></li>
+                    <li id="nav-signup"><a href="/moviego/signup.html">Sign up</a></li>
+                    <li id="nav-user" style="display: none;">
+                        <span id="nav-username"></span>
+                        <button id="logout-btn">Logout</button>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -50,5 +54,45 @@
             <p>&copy; 2024 MovieGo. All rights reserved.</p>
         </div>
     </footer>
+    
+    <script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = getCookie('username');
+            const navSignin = document.getElementById('nav-signin');
+            const navSignup = document.getElementById('nav-signup');
+            const navUser = document.getElementById('nav-user');
+            const navUsername = document.getElementById('nav-username');
+
+            if (username) {
+                // User is logged in
+                navSignin.style.display = 'none';
+                navSignup.style.display = 'none';
+                navUser.style.display = 'flex'; // Display the user section
+                navUsername.textContent = username;
+            } else {
+                // User is not logged in
+                navSignin.style.display = 'inline-block';
+                navSignup.style.display = 'inline-block';
+                navUser.style.display = 'none'; // Hide the user section
+            }
+
+            // Logout button functionality
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    // Clear the username cookie (replace 'username' with your cookie name)
+                    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                    // Reload the page or redirect to logout page as needed
+                    location.reload(); // For demonstration; replace with actual redirect logic
+                });
+            }
+        });
+    </script>
 </body>
 </html>
