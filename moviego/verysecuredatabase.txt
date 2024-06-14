@@ -1,0 +1,7 @@
+{
+    "admin": "admin",
+    "spoinko": "bomzis123",
+    "rudis": "rudis123",
+    "edijs": "edinspedins",
+    "krutaisaccount": "admin"
+}
