@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stundu Saraksts</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="schedule.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <h1>Stundu Saraksts</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Sākums</a></li>
+                <li><a href="izmainas.html">Izmaiņas</a></li>
+                <li><a href="#">Stundu Saraksts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <div id="loading" class="loading" style="display: none;">
+            <p>Notiek ielāde...</p>
+        </div>
+        <section>
+            <h2>Šodienas Stundu Saraksts</h2>
+            <ul id="today-list"></ul>
+        </section>
+        <section>
+            <h2>Rītdienas Stundu Saraksts</h2>
+            <ul id="tomorrow-list"></ul>
+        </section>
+        <section>
+            <h2>Vecākie PDF</h2>
+            <ul id="older-list"></ul>
+        </section>
+        <div id="warning-popup" class="popup" style="display: none;">
+            <p>Neizdevās iegūt PDF failus. Lūdzu, instalējiet CORS atbloķēšanas paplašinājumu savam pārlūkam.</p>
+            <button>Instalēt Paplašinājumu</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Izveidoja <a href="https://www.tiktok.com/@ralfszeltins2" target="_blank" rel="noopener noreferrer">ralfszeltins2</a></p>
+    </footer>
+</body>
+</html>
