@@ -12,7 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const warningPopup = document.getElementById('warning-popup');
     const loadingIndicator = document.getElementById('loading');
 
-    // Generate the URL pattern
+    function showLoading() {
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'flex';
+        }
+    }
+
+    function hideLoading() {
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+        }
+    }
+
+    // Generate the URL pattern with suffixes (_1, _2, etc.)
     function generateUrls() {
         const urls = [];
         const month = String(currentMonth).padStart(2, '0');
@@ -25,62 +37,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let day = 1; day <= today.getDate() + 1; day++) {
             const dayStr = String(day).padStart(2, '0');
-            for (let suffix = ''; suffix <= 10; suffix++) {
-                const suffixStr = suffix ? `_${suffix}` : '';
+            // Generate URL without version suffix
+            urls.push({
+                url: `${basePath}Izm_${dayStr}_${month}_${currentYear}.pdf`,
+                date: `${dayStr}.${month}.${currentYear}`,
+                isToday: dayStr === todayStr,
+                isTomorrow: dayStr === tomorrowStr,
+                version: 0
+            });
+
+            // Generate URLs with version suffixes (_1, _2, etc.)
+            for (let suffix = 1; suffix <= 10; suffix++) {
                 urls.push({
-                    url: `${basePath}Izm_${dayStr}_${month}_${currentYear}${suffixStr}.pdf`,
+                    url: `${basePath}Izm_${dayStr}_${month}_${currentYear}_${suffix}.pdf`,
                     date: `${dayStr}.${month}.${currentYear}`,
                     isToday: dayStr === todayStr,
-                    isTomorrow: dayStr === tomorrowStr
+                    isTomorrow: dayStr === tomorrowStr,
+                    version: suffix
                 });
             }
         }
         return urls;
     }
 
-    // Fetch PDF files
-    function fetchPdf(url) {
-        return fetch(url, { method: 'HEAD' })
-            .then(response => response.ok)
-            .catch(() => false);
+    // Fetch and check if the file is a PDF
+    async function fetchPdf(url) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            const contentType = response.headers.get('Content-Type');
+            return contentType && contentType.includes('application/pdf');
+        } catch {
+            return false;
+        }
     }
 
-    // Show loading indicator
-    function showLoading() {
-        loadingIndicator.style.display = 'flex';
-    }
-
-    // Hide loading indicator
-    function hideLoading() {
-        loadingIndicator.style.display = 'none';
-    }
-
-    // Display available PDFs
+    // Display only the latest version of each PDF
     function displayPdfs(urls) {
         showLoading(); // Show loading indicator
-        Promise.all(urls.map(pdf => fetchPdf(pdf.url).then(exists => ({ ...pdf, exists }))))
+        const latestPdfs = {};
+
+        Promise.all(urls.map(pdf => fetchPdf(pdf.url).then(isPdf => ({ ...pdf, exists: isPdf }))))
             .then(results => {
                 hideLoading(); // Hide loading indicator
                 let hasContent = false;
+
                 results.forEach(pdf => {
                     if (pdf.exists) {
                         hasContent = true;
-                        const listItem = document.createElement('li');
-                        const link = document.createElement('a');
-                        link.href = pdf.url;
-                        link.textContent = pdf.date;
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                        link.classList.add('pdf-link');
-                        listItem.appendChild(link);
 
-                        if (pdf.isToday) {
-                            pdfListSections.today.appendChild(listItem);
-                        } else if (pdf.isTomorrow) {
-                            pdfListSections.tomorrow.appendChild(listItem);
-                        } else {
-                            pdfListSections.older.appendChild(listItem);
+                        // Group PDFs by base date (ignore version number)
+                        const baseDate = pdf.date;
+
+                        // Only store the latest version of the PDF
+                        if (!latestPdfs[baseDate] || pdf.version > latestPdfs[baseDate].version) {
+                            latestPdfs[baseDate] = pdf;
                         }
+                    }
+                });
+
+                // Display the latest versions of the PDFs
+                Object.values(latestPdfs).forEach(pdf => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = pdf.url;
+                    link.textContent = pdf.date;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.classList.add('pdf-link');
+                    listItem.appendChild(link);
+
+                    if (pdf.isToday) {
+                        pdfListSections.today.appendChild(listItem);
+                    } else if (pdf.isTomorrow) {
+                        pdfListSections.tomorrow.appendChild(listItem);
+                    } else {
+                        pdfListSections.older.appendChild(listItem);
                     }
                 });
 
@@ -106,7 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show warning popup
     function showWarningPopup() {
-        warningPopup.style.display = 'block';
+        if (warningPopup) {
+            warningPopup.style.display = 'block';
+        }
     }
 
     // Redirect to extension page
@@ -119,11 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (userAgent.indexOf('safari') > -1) {
             window.open('https://apps.apple.com/us/app/cors-unblock/id1261417857', '_blank');
         } else {
-            alert('Please install a CORS unblock extension for your browser.');
+            alert('Lūdzu instalējiet CORS atbloķēšanas paplašinājumu savam pārlūkam.');
         }
     }
 
-    // Make sure to call `redirectToExtension` when needed
     document.querySelector('.popup button').addEventListener('click', redirectToExtension);
 
     // Execute

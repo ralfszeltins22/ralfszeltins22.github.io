@@ -21,17 +21,33 @@
     </header>
 
     <main class="content">
-        <section class="info">
-            <div id="weather">
-                <h2>Laikapstākļi Jelgavā</h2>
-                <p id="weather-data">-.-°C</p>
+        
+        <!-- Right section for weather, clock, and buttons -->
+        <div class="right-content">
+            <section class="left-section">
+                <div id="weather">
+                    <h2>Laikapstākļi Jelgavā</h2>
+                    <p id="weather-data">-.-°C</p>
+                </div>
+                <div id="clock">
+                    <h2>Pulkstenis</h2>
+                    <p id="time">--:--</p>
+                    <p id="date">-- -- ----</p>
+                </div>
+            </section>
+
+            <div class="right-section">
+                <button id="stundu-laiki-btn">Stundu Laiki</button>
+                <button onclick="window.location.href='https://example.com'">Konsultācijas</button>
             </div>
-            <div id="clock">
-                <h2>Pulkstenis</h2>
-                <p id="time">--:--</p>
-                <p id="date">-- -- ----</p>
+        </div>
+
+        <div id="stundu-laiki-popup" class="popup">
+            <span id="close-popup">x</span>
+            <div class="popup-content">
+                <img src="stundu_laiki.png" alt="Stundu Laiki">
             </div>
-        </section>
+        </div>
     </main>
 
     <footer class="footer">

@@ -221,3 +221,105 @@ body {
     border-radius: 4px;
     z-index: 1000;
 }
+
+.left-section {
+    float: left; /* Align the section to the left */
+    width: 40%; /* Adjust the width as needed */
+}
+
+#weather, #clock {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+
+.right-section {
+    float: right; /* Align the section to the right */
+    width: 40%; /* Adjust the width as needed */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spacing between buttons */
+}
+
+button {
+    padding: 15px;
+    font-size: 1.2em;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+
+/* Popup Styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(31, 31, 31, 0.95); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    max-width: 90vw; /* Limit the popup width to 90% of the viewport width */
+    max-height: 90vh; /* Limit the popup height to 90% of the viewport height */
+    overflow: auto; /* Allow scrolling if the image is too big */
+    opacity: 0; /* Initially invisible */
+    transition: opacity 0.3s ease; /* Fade-in/out transition */
+}
+
+.popup.show {
+    display: block;
+    opacity: 1; /* Visible when show class is added */
+}
+
+/* Image Styles */
+.popup img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+/* Close Button */
+#close-popup {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2em;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1100; /* Ensure it's above the image */
+}
+
+/* Close Button Hover Effect */
+#close-popup:hover {
+    color: #ff0000; /* Change color on hover */
+}
+
+/* Fade Animation for Popup */
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Popup Content Wrapper */
+.popup-content {
+    position: relative;
+    padding-top: 40px; /* Space for the close button */
+}
+
+

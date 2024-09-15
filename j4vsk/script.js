@@ -32,3 +32,21 @@ async function fetchWeather() {
 }
 
 fetchWeather();
+
+// Show the popup with a fade-in effect
+document.getElementById('stundu-laiki-btn').addEventListener('click', function() {
+    const popup = document.getElementById('stundu-laiki-popup');
+    popup.classList.add('show');
+});
+
+// Close the popup with a fade-out effect
+document.getElementById('close-popup').addEventListener('click', function() {
+    const popup = document.getElementById('stundu-laiki-popup');
+    
+    // Add fade-out effect by delaying the removal of the 'show' class
+    popup.style.opacity = 0;
+    setTimeout(function() {
+        popup.classList.remove('show');
+        popup.style.opacity = 1; // Reset opacity for next time
+    }, 300); // Duration of the fade-out (matching the CSS transition)
+});
