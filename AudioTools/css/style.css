@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+#app header {
+    text-align: center;
+    padding: 1rem;
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #333;
+    border-radius: 0 0 10px 10px;
+}
+
+#app main {
+    padding: 2rem;
+    text-align: center;
+}
+
+#controls button,
+#reset-button {
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #006400;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#controls button:hover,
+#reset-button:hover {
+    background-color: #009900;
+    transform: scale(1.05);
+}
+
+#controls button:active,
+#reset-button:active {
+    transform: scale(0.95);
+}
+
+canvas {
+    margin-top: 1rem;
+    width: 100%;
+    height: 200px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+}
+
+#equalizer {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0.5rem;
+    margin-top: 2rem; /* Adjusted margin for reset button clearance */
+    flex-wrap: wrap;
+}
+
+.slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 70px; /* Maintain a reasonable width for all sliders */
+}
+
+.slider-label {
+    margin-bottom: 6rem;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+.slider {
+    width: 200px;
+    writing-mode: bt-lr;
+    transform: rotate(270deg);
+    margin-bottom: 1rem;
+}
+
+.slider-value {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #444;
+    background-color: #1f1f1f;
+    color: white;
+    border-radius: 5px;
+    margin-top: 5.5rem;
+}

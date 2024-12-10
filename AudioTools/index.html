@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Audio Tools</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app" class="dark-theme">
+        <header>
+            <h1>Online Audio Tools</h1>
+        </header>
+        <main>
+            <input type="file" id="file-input" accept="audio/*,video/*">
+            <canvas id="audio-visualizer"></canvas>
+            <div id="controls">
+                <button id="play-button">Play</button>
+                <button id="stop-button">Stop</button>
+            </div>
+            <div id="equalizer">
+                <h2>Equalizer</h2>
+                <div id="reset-container">
+                    <button id="reset-button">Reset</button>
+                </div>
+                <div class="slider-container" id="sliders">
+                    <!-- Equalizer sliders will be dynamically generated -->
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>Created with ❤️ by Your Name</p>
+        </footer>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
