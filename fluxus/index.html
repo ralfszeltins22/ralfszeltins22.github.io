@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxus Executor</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background-color: #191b29; /* Background color of the Fluxus screen */
+            color: white;
+        }
+
+        /* Fullscreen Fluxus Screen */
+        .fake-window {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw; /* Full width of the viewport */
+            height: 100vh; /* Full height of the viewport */
+            background-color: #191b29; /* Background color */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space out content */
+            align-items: stretch;
+            overflow: auto; /* Allow scrolling if needed */
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            display: flex;
+            align-items: center;
+            background-color: #2e3142;
+            height: 40px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .tab {
+            background-color: #3c3f50;
+            color: white;
+            padding: 5px 15px;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            max-width: 150px; /* Limit tab width */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            background-color: #4b5067;
+        }
+
+        .tab:hover {
+            background-color: #4b5067;
+        }
+
+        .add-tab-button {
+            background-color: #ff5555;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            line-height: 30px; /* Center text vertically */
+            text-align: center; /* Center text horizontally */
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .add-tab-button:hover {
+            background-color: #ff3333;
+        }
+
+        /* Rename and Close Buttons */
+        .rename-button,
+        .close-tab {
+            margin-left: 5px;
+            color: #ff5555;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .rename-button:hover,
+        .close-tab:hover {
+            color: #ff3333;
+        }
+
+        /* Rename Input Field */
+        .rename-input {
+            background-color: #3c3f50;
+            color: white;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            padding: 2px 5px;
+            width: 100px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Lua Code Box */
+        .lua-box {
+            width: 100%;
+            flex-grow: 1;
+            background-color: #1e1e1e; /* Dark editor background */
+            color: #d4d4d4; /* Light text color */
+            font-family: Consolas, monospace;
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid #444;
+            box-sizing: border-box;
+            overflow-y: auto; /* Enable scrolling */
+            white-space: pre-wrap; /* Preserve formatting */
+        }
+
+        /* Bottom Buttons */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #2e3142;
+        }
+
+        .save-button,
+        .upload-button {
+            padding: 10px 20px;
+            background-color: #ff5555;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .save-button:hover,
+        .upload-button:hover {
+            background-color: #ff3333;
+        }
+
+        /* File Input (Hidden) */
+        .file-input {
+            display: none;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #191b29; /* Same as background color, fully opaque */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Logo Styling */
+        .logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Take up the full width of the screen */
+            height: 100%; /* Take up the full height of the screen */
+            object-fit: cover; /* Ensure the logo scales properly */
+            opacity: 0; /* Start fully transparent */
+            transition: opacity 0.5s ease-in-out; /* Smooth fade-in/fade-out */
+        }
+    </style>
+</head>
+<body>
+    <!-- Fullscreen Fluxus Screen -->
+    <div id="fakeWindow" class="fake-window">
+        <!-- Splash Screen (Inside Fake Window) -->
+        <div id="splashScreen" class="splash-screen">
+            <img id="logo1" src="logo1.png" alt="Logo 1" class="logo">
+            <img id="logo2" src="logo2.png" alt="Logo 2" class="logo">
+        </div>
+
+        <!-- Tab Bar -->
+        <div id="tabBar" class="tab-bar">
+            <div class="add-tab-button" onclick="addTab()">+</div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="main-content">
+            <textarea id="defaultLuaBox" class="lua-box"></textarea>
+        </div>
+
+        <!-- Bottom Buttons -->
+        <div class="button-container">
+            <div>
+                <button id="saveButton" class="save-button" onclick="saveFile()">Save Tab as .lua</button>
+                <input type="file" id="fileInput" class="file-input" accept=".lua" onchange="uploadFile(event)">
+                <button id="uploadButton" class="upload-button" onclick="document.getElementById('fileInput').click()">Upload Lua File</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Management
+        let tabCounter = 1;
+        let activeTabId = null;
+
+        function addTab() {
+            const tabId = `tab-${tabCounter}`;
+            const luaBoxId = `lua-box-${tabCounter}`;
+
+            // Create Tab
+            const tab = document.createElement("div");
+            tab.id = tabId;
+            tab.className = "tab";
+            tab.textContent = `Tab ${tabCounter}`;
+            tab.onclick = () => switchTab(tabId);
+
+            // Rename Button (📝)
+            const renameButton = document.createElement("span");
+            renameButton.className = "rename-button";
+            renameButton.innerHTML = "📝";
+            renameButton.onclick = (e) => {
+                e.stopPropagation();
+                renameTab(tabId);
+            };
+            tab.appendChild(renameButton);
+
+            // Close Button (×)
+            const closeButton = document.createElement("span");
+            closeButton.className = "close-tab";
+            closeButton.innerHTML = "&times;";
+            closeButton.onclick = (e) => {
+                e.stopPropagation();
+                closeTab(tabId);
+            };
+            tab.appendChild(closeButton);
+
+            // Add Tab to Tab Bar
+            document.getElementById("tabBar").insertBefore(tab, document.querySelector(".add-tab-button"));
+
+            // Create Lua Box for Tab
+            const luaBox = document.createElement("textarea");
+            luaBox.id = luaBoxId;
+            luaBox.className = "lua-box";
+            luaBox.style.display = "none";
+            document.getElementById("mainContent").appendChild(luaBox);
+
+            // Switch to New Tab
+            switchTab(tabId);
+
+            // Increment Tab Counter
+            tabCounter++;
+        }
+
+        function switchTab(tabId) {
+            // Hide All Lua Boxes
+            document.querySelectorAll(".lua-box").forEach((box) => {
+                box.style.display = "none";
+            });
+
+            // Deactivate All Tabs
+            document.querySelectorAll(".tab").forEach((tab) => {
+                tab.classList.remove("active");
+            });
+
+            // Activate Selected Tab and Show Corresponding Lua Box
+            const selectedTab = document.getElementById(tabId);
+            const selectedLuaBoxId = `lua-box-${tabId.split("-")[1]}`;
+            const selectedLuaBox = document.getElementById(selectedLuaBoxId);
+
+            selectedTab.classList.add("active");
+            selectedLuaBox.style.display = "block";
+
+            activeTabId = tabId;
+        }
+
+        function closeTab(tabId) {
+            const tabs = document.querySelectorAll(".tab");
+
+            // Ensure at least one tab remains open
+            if (tabs.length <= 1) {
+                alert("At least one tab must remain open.");
+                return;
+            }
+
+            const tab = document.getElementById(tabId);
+            const luaBoxId = `lua-box-${tabId.split("-")[1]}`;
+            const luaBox = document.getElementById(luaBoxId);
+
+            // Remove Tab and Lua Box
+            tab.remove();
+            luaBox.remove();
+
+            // Switch to Another Tab if Closed Tab Was Active
+            if (tabId === activeTabId) {
+                const remainingTabs = document.querySelectorAll(".tab");
+                switchTab(remainingTabs[remainingTabs.length - 1].id);
+            }
+        }
+
+        function renameTab(tabId) {
+            const tab = document.getElementById(tabId);
+            const currentName = tab.textContent.replace(/\s*📝\s*×$/, "").trim(); // Remove buttons from name
+
+            // Replace Tab Name with Input Field
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = currentName;
+            input.maxLength = 20; // Limit to 20 characters
+            input.className = "rename-input";
+
+            // Restrict Special Characters
+            input.oninput = () => {
+                input.value = input.value.replace(/[^a-zA-Z0-9_\- ]/g, "");
+            };
+
+            // Save New Name on Blur or Enter Key
+            input.onblur = () => saveTabName(tab, input);
+            input.onkeydown = (e) => {
+                if (e.key === "Enter") {
+                    saveTabName(tab, input);
+                }
+            };
+
+            // Replace Tab Content with Input Field
+            tab.textContent = "";
+            tab.appendChild(input);
+            input.focus();
+
+            // Re-add Buttons After Input Field
+            const renameButton = document.createElement("span");
+            renameButton.className = "rename-button";
+            renameButton.innerHTML = "📝";
+            renameButton.onclick = (e) => {
+                e.stopPropagation();
+                renameTab(tabId);
+            };
+
+            const closeButton = document.createElement("span");
+            closeButton.className = "close-tab";
+            closeButton.innerHTML = "&times;";
+            closeButton.onclick = (e) => {
+                e.stopPropagation();
+                closeTab(tabId);
+            };
+
+            tab.appendChild(renameButton);
+            tab.appendChild(closeButton);
+        }
+
+        function saveTabName(tab, input) {
+            const newName = input.value.trim() || "Unnamed";
+            tab.textContent = newName;
+
+            // Re-add Buttons
+            const renameButton = document.createElement("span");
+            renameButton.className = "rename-button";
+            renameButton.innerHTML = "📝";
+            renameButton.onclick = (e) => {
+                e.stopPropagation();
+                renameTab(tab.id);
+            };
+
+            const closeButton = document.createElement("span");
+            closeButton.className = "close-tab";
+            closeButton.innerHTML = "&times;";
+            closeButton.onclick = (e) => {
+                e.stopPropagation();
+                closeTab(tab.id);
+            };
+
+            tab.appendChild(renameButton);
+            tab.appendChild(closeButton);
+        }
+
+        // File Handling
+        function saveFile() {
+            const activeLuaBoxId = `lua-box-${activeTabId.split("-")[1]}`;
+            const activeLuaBox = document.getElementById(activeLuaBoxId) || document.getElementById("defaultLuaBox");
+
+            const content = activeLuaBox.value;
+            const blob = new Blob([content], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${activeTabId || "default"}.lua`;
+            a.click();
+
+            URL.revokeObjectURL(url);
+        }
+
+        function uploadFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const fileName = file.name.replace(/\.lua$/, ""); // Remove .lua extension
+                    const tabId = `tab-${tabCounter}`;
+                    const luaBoxId = `lua-box-${tabCounter}`;
+
+                    // Create New Tab
+                    const tab = document.createElement("div");
+                    tab.id = tabId;
+                    tab.className = "tab";
+                    tab.textContent = fileName;
+                    tab.onclick = () => switchTab(tabId);
+
+                    // Rename Button (📝)
+                    const renameButton = document.createElement("span");
+                    renameButton.className = "rename-button";
+                    renameButton.innerHTML = "📝";
+                    renameButton.onclick = (e) => {
+                        e.stopPropagation();
+                        renameTab(tabId);
+                    };
+                    tab.appendChild(renameButton);
+
+                    // Close Button (×)
+                    const closeButton = document.createElement("span");
+                    closeButton.className = "close-tab";
+                    closeButton.innerHTML = "&times;";
+                    closeButton.onclick = (e) => {
+                        e.stopPropagation();
+                        closeTab(tabId);
+                    };
+                    tab.appendChild(closeButton);
+
+                    // Add Tab to Tab Bar
+                    document.getElementById("tabBar").insertBefore(tab, document.querySelector(".add-tab-button"));
+
+                    // Create Lua Box for Tab
+                    const luaBox = document.createElement("textarea");
+                    luaBox.id = luaBoxId;
+                    luaBox.className = "lua-box";
+                    luaBox.style.display = "none";
+                    luaBox.value = e.target.result;
+                    document.getElementById("mainContent").appendChild(luaBox);
+
+                    // Switch to New Tab
+                    switchTab(tabId);
+
+                    // Increment Tab Counter
+                    tabCounter++;
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        // Splash screen animation
+        document.addEventListener("DOMContentLoaded", () => {
+            const logo1 = document.getElementById("logo1");
+            const logo2 = document.getElementById("logo2");
+            const splashScreen = document.getElementById("splashScreen");
+            const mainScreen = document.getElementById("mainContent");
+
+            // Initially hide both logos
+            logo1.style.opacity = 0;
+            logo2.style.opacity = 0;
+
+            // Fade in logo1
+            setTimeout(() => {
+                logo1.style.opacity = 1;
+            }, 500);
+
+            // Fade out logo1 and fade in logo2
+            setTimeout(() => {
+                logo1.style.opacity = 0;
+                logo2.style.opacity = 1;
+            }, 1500);
+
+            // Switch to main screen
+            setTimeout(() => {
+                splashScreen.style.display = "none";
+                mainScreen.style.display = "flex";
+            }, 2500);
+        });
+
+        // Initialize First Tab
+        document.addEventListener("DOMContentLoaded", () => {
+            addTab();
+        });
+    </script>
+</body>
+</html>
