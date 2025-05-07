@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malware - RZ's Lair</title>
+    <title>Software - RZ's Lair</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -103,10 +103,10 @@
                         <li><a href="projects.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
                             <i class="fas fa-code-branch mr-2"></i>Projects
                         </a></li>
-                        <li><a href="malware.html" class="nav-link active px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
+                        <li><a href="malware.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
                             <i class="fas fa-bug mr-2"></i>Malware
                         </a></li>
-                        <li><a href="software.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
+                        <li><a href="software.html" class="nav-link active px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
                             <i class="fas fa-download mr-2"></i>Software
                         </a></li>
                     </ul>
@@ -118,7 +118,7 @@
         <main class="glass-effect rounded-xl p-6 mb-8 fade-in">
             <div class="flex items-center mb-6">
                 <h2 class="text-3xl font-bold text-purple-300">
-                    <i class="fas fa-bug mr-2"></i>Malware Repository
+                    <i class="fas fa-bug mr-2"></i>Software Repository
                 </h2>
                 <div class="ml-auto">
                     <button id="view-mode-toggle" class="px-3 py-1 bg-purple-700 hover:bg-purple-600 rounded-lg transition text-sm">
@@ -128,7 +128,7 @@
             </div>
             
             <p class="text-gray-300 mb-6">
-                Browse through malware samples for educational purposes. Please don't run these files on your host machine unless you know what you're doing. I am not responsible for any damages made.
+                Browse through some software which might be useful for you.
             </p>
 
             <!-- File Browser Section -->
@@ -136,7 +136,7 @@
                 <!-- Path Navigation -->
                 <div class="flex items-center p-4 border-b border-purple-900">
                     <div class="flex-1 overflow-x-auto whitespace-nowrap">
-                        <span class="text-purple-300 font-mono" id="current-path">/malware/</span>
+                        <span class="text-purple-300 font-mono" id="current-path">/software/</span>
                     </div>
                     <button id="up-button" class="ml-4 px-3 py-1 bg-purple-700 hover:bg-purple-600 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                         <i class="fas fa-level-up-alt mr-1"></i>Up
@@ -153,7 +153,7 @@
                     <i class="fas fa-exclamation-triangle text-yellow-400 text-4xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">GitHub API Rate Limit Exceeded</h3>
                     <p class="mb-4">You've reached the rate limit for the GitHub API. Please wait or view files directly on GitHub.</p>
-                    <a href="https://github.com/ralfszeltins22/ralfszeltins22.github.io/tree/main/malware" 
+                    <a href="https://github.com/ralfszeltins22/ralfszeltins22.github.io/tree/main/software" 
                        target="_blank" 
                        class="px-4 py-2 bg-purple-700 hover:bg-purple-600 rounded-lg transition inline-block">
                         <i class="fab fa-github mr-2"></i>View on GitHub
@@ -230,13 +230,13 @@
                 apiError.classList.add('hidden');
                 
                 // Update the path display
-                currentPathElement.textContent = `/malware/${currentFolderPath}`;
+                currentPathElement.textContent = `/software/${currentFolderPath}`;
                 
                 // Enable or disable the "Up" button based on whether we're at the root
                 upButton.disabled = !currentFolderPath;
                 
                 // Use the GitHub API URL with your repository path
-                const apiUrl = `https://api.github.com/repos/ralfszeltins22/ralfszeltins22.github.io/contents/malware/${currentFolderPath}`;
+                const apiUrl = `https://api.github.com/repos/ralfszeltins22/ralfszeltins22.github.io/contents/software/${currentFolderPath}`;
                 
                 fetch(apiUrl)
                     .then(response => {
