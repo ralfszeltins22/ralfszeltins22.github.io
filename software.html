@@ -6,6 +6,7 @@
     <title>Software - RZ's Lair</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <style>
         /* Custom styles to complement Tailwind */
         body {
@@ -118,7 +119,7 @@
         <main class="glass-effect rounded-xl p-6 mb-8 fade-in">
             <div class="flex items-center mb-6">
                 <h2 class="text-3xl font-bold text-purple-300">
-                    <i class="fas fa-bug mr-2"></i>Software Repository
+                    <i class="fas fa-download mr-2"></i>Software Repository
                 </h2>
                 <div class="ml-auto">
                     <button id="view-mode-toggle" class="px-3 py-1 bg-purple-700 hover:bg-purple-600 rounded-lg transition text-sm">
@@ -128,7 +129,7 @@
             </div>
             
             <p class="text-gray-300 mb-6">
-                Browse through some software which might be useful for you.
+                Browse through various software tools and utilities. All software is provided as-is without warranty.
             </p>
 
             <!-- File Browser Section -->
@@ -180,6 +181,46 @@
         </footer>
     </div>
 
+    <!-- File Preview Modal -->
+    <div id="file-preview-modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center hidden">
+        <div class="glass-effect rounded-xl w-11/12 md:w-3/4 lg:w-2/3 max-h-screen flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-4 border-b border-purple-800">
+                <h3 class="text-lg font-semibold" id="preview-filename">File Preview</h3>
+                <div class="flex items-center space-x-2">
+                    <a id="download-btn" href="#" class="px-3 py-1 bg-purple-700 hover:bg-purple-600 rounded-lg transition text-sm" download>
+                        <i class="fas fa-download mr-1"></i>Download
+                    </a>
+                    <a id="raw-btn" href="#" class="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-lg transition text-sm" target="_blank">
+                        <i class="fas fa-file-code mr-1"></i>Raw
+                    </a>
+                    <button id="close-preview" class="text-gray-400 hover:text-white ml-2">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Loading Indicator -->
+            <div id="preview-loading" class="p-8 flex-grow flex justify-center items-center">
+                <div class="loader w-10 h-10 border-4 border-gray-600 border-solid rounded-full"></div>
+            </div>
+            
+            <!-- Error Message -->
+            <div id="preview-error" class="p-8 flex-grow hidden">
+                <div class="text-center">
+                    <i class="fas fa-exclamation-circle text-red-400 text-4xl mb-4"></i>
+                    <p class="text-red-300">Failed to load file preview.</p>
+                </div>
+            </div>
+            
+            <!-- File Content -->
+            <div id="preview-content" class="p-4 overflow-auto flex-grow hidden">
+                <pre><code id="code-content" class="text-sm text-gray-300 font-mono whitespace-pre-wrap break-words"></code></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Identify the current page and add 'active' class to the nav link
@@ -199,8 +240,125 @@
             const apiError = document.getElementById('api-error');
             const viewModeToggle = document.getElementById('view-mode-toggle');
             
+            // File preview elements
+            const filePreviewModal = document.getElementById('file-preview-modal');
+            const previewFilename = document.getElementById('preview-filename');
+            const previewContent = document.getElementById('preview-content');
+            const previewLoading = document.getElementById('preview-loading');
+            const previewError = document.getElementById('preview-error');
+            const codeContent = document.getElementById('code-content');
+            const downloadBtn = document.getElementById('download-btn');
+            const rawBtn = document.getElementById('raw-btn');
+            const closePreview = document.getElementById('close-preview');
+            
             let currentFolderPath = '';
             let isGridView = false;
+            
+            // Text file extensions that can be previewed
+            const previewableExtensions = [
+                'txt', 'log', 'md', 'json', 'xml', 'csv', 'html', 'css', 'js', 
+                'bat', 'cmd', 'ps1', 'sh', 'py', 'c', 'cpp', 'cs', 'java', 'php',
+                'rb', 'go', 'ts', 'jsx', 'tsx', 'yml', 'yaml', 'ini', 'cfg', 'conf'
+            ];
+            
+            // Function to determine if a file can be previewed
+            function isPreviewable(filename) {
+                const ext = filename.split('.').pop().toLowerCase();
+                return previewableExtensions.includes(ext);
+            }
+            
+            // Function to get language class for syntax highlighting
+            function getLanguageClass(filename) {
+                const ext = filename.split('.').pop().toLowerCase();
+                
+                // Map file extensions to highlight.js language classes
+                const languageMap = {
+                    'js': 'javascript',
+                    'ts': 'typescript',
+                    'jsx': 'javascript',
+                    'tsx': 'typescript',
+                    'py': 'python',
+                    'rb': 'ruby',
+                    'cs': 'csharp',
+                    'php': 'php',
+                    'c': 'c',
+                    'cpp': 'cpp',
+                    'java': 'java',
+                    'go': 'go',
+                    'html': 'html',
+                    'xml': 'xml',
+                    'css': 'css',
+                    'json': 'json',
+                    'yml': 'yaml',
+                    'yaml': 'yaml',
+                    'md': 'markdown',
+                    'bat': 'batch',
+                    'cmd': 'batch',
+                    'sh': 'bash',
+                    'ps1': 'powershell'
+                };
+                
+                return languageMap[ext] || 'plaintext';
+            }
+            
+            // Function to open the preview modal
+            function openFilePreview(filename, url) {
+                previewFilename.textContent = filename;
+                downloadBtn.setAttribute('href', url);
+                downloadBtn.setAttribute('download', filename);
+                rawBtn.setAttribute('href', url);
+                
+                // Show loading, hide content and error
+                previewLoading.classList.remove('hidden');
+                previewContent.classList.add('hidden');
+                previewError.classList.add('hidden');
+                filePreviewModal.classList.remove('hidden');
+                
+                // Fetch the file content
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch file content');
+                        }
+                        return response.text();
+                    })
+                    .then(content => {
+                        // Set content and language class for syntax highlighting
+                        codeContent.textContent = content;
+                        codeContent.className = getLanguageClass(filename);
+                        
+                        // Apply syntax highlighting
+                        hljs.highlightElement(codeContent);
+                        
+                        // Hide loading, show content
+                        previewLoading.classList.add('hidden');
+                        previewContent.classList.remove('hidden');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        previewLoading.classList.add('hidden');
+                        previewError.classList.remove('hidden');
+                    });
+            }
+            
+            // Close preview modal
+            closePreview.addEventListener('click', function() {
+                filePreviewModal.classList.add('hidden');
+            });
+            
+            // Close modal when clicking outside
+            filePreviewModal.addEventListener('click', function(event) {
+                if (event.target === filePreviewModal) {
+                    filePreviewModal.classList.add('hidden');
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && !filePreviewModal.classList.contains('hidden')) {
+                    filePreviewModal.classList.add('hidden');
+                }
+            });
             
             // Toggle view mode (list/grid)
             viewModeToggle.addEventListener('click', function() {
@@ -289,6 +447,8 @@
                                 itemElement.addEventListener('click', function() {
                                     if (isDir) {
                                         fetchAndDisplayContents(`${currentFolderPath}/${item.name}`);
+                                    } else if (isPreviewable(item.name)) {
+                                        openFilePreview(item.name, item.download_url);
                                     } else {
                                         window.open(item.download_url, '_blank');
                                     }
