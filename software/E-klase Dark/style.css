@@ -1,3 +1,10 @@
+
+        /*  =====================================  */
+        /*      E-Klase Dark by ralfszeltins2      */
+        /*        ralfszeltins22.github.io         */
+        /*  =====================================  */
+        /*               Version 1.1               */
+
         /* Backgrounds */
         body,
         html {
@@ -615,4 +622,53 @@
                 background: #0000;
                 pointer-events: none;
             }
+        }
+
+        .header-first-menu-item {
+            border-left: #dcdcdc 0px solid;
+        }
+
+        .header-first-menu-item .header-first-submenu {
+            background: #656565;
+        }
+
+        .header-first-submenu-item,
+        .header-second-submenu-item {
+            border-bottom: 1px solid #656565;
+        }
+
+        .popover.bottom > .arrow::after {
+            border-bottom-color: #656565;
+        }
+
+        .header-second .header-second-submenu {
+            background: #656565;
+        }
+
+        .MessageItem--hasAttachments__Date[data-v-0bcf0c3a]::before {
+            color: #28b47b;
+        }
+
+        .MessageFollowUpStatus--none[data-v-0e73e720]::before {
+            color: #808080;
+        }
+
+        .dashboard-news {
+            background: #222222;
+        }
+
+        .dashboard-news .dashboard-news-item {
+            border-bottom: 1px solid #656565;
+        }
+
+        .article-content {
+            color: #e0e0e0 !important;
+        }
+
+        .dashboard-news .dashboard-news-item h3 {
+            color: #e0e0e0;
+        }
+
+        .dashboard-news .dashboard-news-item .article-meta .date {
+            color: #a0a0a0;
         }
