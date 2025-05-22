@@ -1,0 +1,34 @@
+/* Hide aktualitātes for E-Klase logged in homepage */
+/*              Made by ralfszeltins2               */
+/*             ralfszeltins22.github.io             */
+/*       Set to URLs on the domain: e-klase.lv      */
+
+.dashboard-news,
+.article-meta,
+.article-content,
+.dashboard-news-item,
+.article-content img,
+.article-meta h3,
+.date,
+.tag,
+.dashboard-news .dashboard-news-item h3,
+.dashboard-news .dashboard-news-item .article-content p,
+.section h2,
+.dashboard-news .container,
+.dashboard-news .container .homepage-h2,
+.dashboard-news .dashboard-news-item,
+.dashboard-news .dashboard-news-item {
+    height: 0px !important;
+    background-color: #00000000 !important;
+    font-size: 0px !important;
+    color: #00000000 !important;
+    line-height: 0px !important;
+    margin: 0px !important;
+    pointer-events: none;
+    min-height: 0px !important;
+    max-height: 0px !important;
+    min-width: 0px !important;
+    max-width: 0px !important;
+    border: 0px none #00000000 !important;
+    padding: 0px !important;
+}

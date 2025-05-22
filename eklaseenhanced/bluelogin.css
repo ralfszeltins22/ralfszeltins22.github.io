@@ -1,0 +1,28 @@
+/*       Blue login box fix for E-klase homepage        */
+/*                Made by ralfszeltins2                 */
+/*               ralfszeltins22.github.io               */
+/*  Set to URLs starting with: https://www.e-klase.lv/  */
+
+.login-widget .login-widget__header {
+  background-color: #029ae3;
+}
+
+.login-widget {
+  border-color: #029ae3;
+}
+
+.btn.btn-secondary, .btn.btn-success, .search .search__search-results .search__section .ais-InfiniteHits .btn-secondary.ais-InfiniteHits-loadMore, .search .search__search-results .search__section .ais-InfiniteHits .btn-secondary.search__section-more-btn, .search .search__search-results .search__section .ais-InfiniteHits .btn-success.ais-InfiniteHits-loadMore, .search .search__search-results .search__section .ais-InfiniteHits .btn-success.search__section-more-btn, .search .search__search-results .search__section .search__section-more .btn-secondary.ais-InfiniteHits-loadMore, .search .search__search-results .search__section .search__section-more .btn-secondary.search__section-more-btn, .search .search__search-results .search__section .search__section-more .btn-success.ais-InfiniteHits-loadMore, .search .search__search-results .search__section .search__section-more .btn-success.search__section-more-btn {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #029ae3;
+  --bs-btn-border-color: #029ae3;
+  --bs-btn-disabled-bg: #029ae3;
+  --bs-btn-disabled-border-color: #029ae3;
+  --bs-btn-hover-bg: #0078b1;
+  --bs-btn-hover-border-color: #0078b1;
+  --bs-btn-active-bg: #015e89;
+  --bs-btn-active-border-color: #015e89;
+}
+
+.login-widget .login-widget__body .login__form input {
+  border: .0625rem solid #029ae3;
+}
