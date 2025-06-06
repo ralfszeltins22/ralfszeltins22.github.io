@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software - RZ's Lair</title>
+    <title>Files - RZ's Lair</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
@@ -55,7 +55,7 @@
             background-color: #8b5cf6;
         }
 
-                @media (max-width: 1023px) {
+        @media (max-width: 1023px) {
             .nav-link:after {
                 display: none;
             }
@@ -130,19 +130,22 @@
                 </h1>
                 
                 <!-- Navigation -->
-                <nav class="w-full md:w-auto">
+                 <nav class="w-full md:w-auto">
                     <ul class="flex flex-wrap justify-center space-x-1 md:space-x-4">
-                        <li><a href="index.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
-                            <i class="fas fa-home mr-2"></i>Home
+                            <li><a href="index.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
+                            <i class="fas fa-home mr-2"></i><span class="lg:inline hidden">Home</span>
                         </a></li>
-                        <li><a href="projects.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
-                            <i class="fas fa-code-branch mr-2"></i>Projects
+                            <li><a href="projects.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
+                            <i class="fas fa-code-branch mr-2"></i><span class="lg:inline hidden">Projects</span>
+                        </a></li>
+                        <li><a href="files.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
+                            <i class="fas fa-folder mr-2"></i><span class="lg:inline hidden">Files</span>
                         </a></li>
                         <li><a href="malware.html" class="nav-link px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
-                            <i class="fas fa-bug mr-2"></i>Malware
+                            <i class="fas fa-bug mr-2"></i><span class="lg:inline hidden">Malware</span>
                         </a></li>
                         <li><a href="software.html" class="nav-link active px-4 py-2 rounded-lg hover:bg-purple-900 hover:bg-opacity-30 transition">
-                            <i class="fas fa-download mr-2"></i>Software
+                            <i class="fas fa-download mr-2"></i><span class="lg:inline hidden">Software</span>
                         </a></li>
                     </ul>
                 </nav>
@@ -153,7 +156,7 @@
         <main class="glass-effect rounded-xl p-6 mb-8 fade-in">
             <div class="flex items-center mb-6">
                 <h2 class="text-3xl font-bold text-purple-300">
-                    <i class="fas fa-download mr-2"></i>Software Repository
+                    <i class="fas fa-download mr-2"></i>Files Repository
                 </h2>
                 <div class="ml-auto">
                     <button id="view-mode-toggle" class="px-3 py-1 bg-purple-700 hover:bg-purple-600 rounded-lg transition text-sm">
@@ -163,7 +166,7 @@
             </div>
             
             <p class="text-gray-300 mb-6">
-                Browse through various software tools and utilities. All software is provided as-is without warranty.
+                Browse through some uncategorized files that I thought I should share online.
             </p>
 
             <!-- File Browser Section -->
@@ -171,7 +174,7 @@
                 <!-- Path Navigation -->
                 <div class="flex items-center p-4 border-b border-purple-900">
                     <div class="flex-1 overflow-x-auto whitespace-nowrap">
-                        <span class="text-purple-300 font-mono" id="current-path">/software/</span>
+                        <span class="text-purple-300 font-mono" id="current-path">/files/</span>
                     </div>
                     <button id="up-button" class="ml-4 px-3 py-1 bg-purple-700 hover:bg-purple-600 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                         <i class="fas fa-level-up-alt mr-1"></i>Up
@@ -188,7 +191,7 @@
                     <i class="fas fa-exclamation-triangle text-yellow-400 text-4xl mb-4"></i>
                     <h3 class="text-xl font-bold mb-2">GitHub API Rate Limit Exceeded</h3>
                     <p class="mb-4">You've reached the rate limit for the GitHub API. Please wait or view files directly on GitHub.</p>
-                    <a href="https://github.com/ralfszeltins22/ralfszeltins22.github.io/tree/main/software" 
+                    <a href="https://github.com/ralfszeltins22/ralfszeltins22.github.io/tree/main/files" 
                        target="_blank" 
                        class="px-4 py-2 bg-purple-700 hover:bg-purple-600 rounded-lg transition inline-block">
                         <i class="fab fa-github mr-2"></i>View on GitHub
@@ -422,13 +425,13 @@
                 apiError.classList.add('hidden');
                 
                 // Update the path display
-                currentPathElement.textContent = `/software/${currentFolderPath}`;
+                currentPathElement.textContent = `/files/${currentFolderPath}`;
                 
                 // Enable or disable the "Up" button based on whether we're at the root
                 upButton.disabled = !currentFolderPath;
                 
                 // Use the GitHub API URL with your repository path
-                const apiUrl = `https://api.github.com/repos/ralfszeltins22/ralfszeltins22.github.io/contents/software/${currentFolderPath}`;
+                const apiUrl = `https://api.github.com/repos/ralfszeltins22/ralfszeltins22.github.io/contents/files/${currentFolderPath}`;
                 
                 fetch(apiUrl)
                     .then(response => {
