@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieGo - Watch Movies Online</title>
     <link rel="stylesheet" href="styler.css">
+    <style>
+        .loading-section {
+            text-align: center;
+            color: #ccc;
+            padding: 40px 0;
+            font-size: 16px;
+        }
+
+        .movie-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .movie-card.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .movie-card img {
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .error-message {
+            text-align: center;
+            color: #ff6b6b;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -37,19 +73,14 @@
     <section id="movies" class="movies">
         <div class="container">
             <h2>Sponsored</h2>
-            <div class="movie-list">
-                <div class="movie-card">
-                    <img src="video/autism_crime.png" alt="Movie Title">
-                    <h3>Autism Crime</h3>
-                    <p>A 12 year old boy who seems to be an autist - lost in the future with other people.</p>
-                    <a href="video/autism-crime.html">Watch</a>
-                </div>
-                <div class="movie-card">
-                    <img src="video/sharknado-2013.png" alt="Movie Title">
-                    <h3>Sharknado (2013)</h3>
-                    <p>When a freak hurricane swamps Los Angeles, nature's deadliest killer rules sea, land, and air as thousands of sharks terrorize the waterlogged populace.</p>
-                    <a href="video/sharknado-2013.html">Watch</a>
-                </div>
+            <div id="sponsored-loading" class="loading-section">
+                Loading sponsored movies...
+            </div>
+            <div id="sponsored-error" class="error-message" style="display: none;">
+                Failed to load sponsored movies. Please try again later.
+            </div>
+            <div id="sponsored-movies" class="movie-list">
+                <!-- Sponsored movies will be loaded here -->
             </div>
         </div>
     </section>
@@ -57,13 +88,14 @@
     <section id="discover" class="movies">
         <div class="container">
             <h2>Discover</h2>
-            <div class="movie-list">
-                <div class="movie-card">
-                    <img src="video/autism_crime.png" alt="Movie Title">
-                    <h3>Autism Crime</h3>
-                    <p>A 12 year old boy who seems to be an autist - lost in the future with other people.</p>
-                    <a href="video/autism-crime.html">Watch</a>
-                </div>
+            <div id="discover-loading" class="loading-section">
+                Loading movies...
+            </div>
+            <div id="discover-error" class="error-message" style="display: none;">
+                Failed to load movies. Please try again later.
+            </div>
+            <div id="discover-movies" class="movie-list">
+                <!-- All movies will be loaded here -->
             </div>
         </div>
     </section>
@@ -96,13 +128,136 @@
     </footer>
 
     <script>
+        let videoDatabase = {};
+
+        // Load video database from viddb.txt
+        async function loadVideoDatabase() {
+            try {
+                const response = await fetch('https://ralfszeltins22.github.io/moviego/viddb.txt');
+                if (response.ok) {
+                    const data = await response.json();
+                    videoDatabase = data;
+                    return true;
+                } else {
+                    console.error('Error loading video database:', response.status, response.statusText);
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error loading video database:', error);
+                return false;
+            }
+        }
+
+        // Create movie card HTML
+        function createMovieCard(movieId, movieData) {
+            return `
+                <div class="movie-card">
+                    <img src="${movieData.poster || 'video/default-poster.png'}" alt="${movieData.title}" onerror="this.src='video/default-poster.png'">
+                    <h3>${movieData.title}</h3>
+                    <p>${movieData.description}</p>
+                    <div style="margin: 10px 0; font-size: 14px; color: #aaa;">
+                        <span>${movieData.year} • ${movieData.genre} • ${movieData.rating}</span>
+                    </div>
+                    <a href="video.html?v=${movieId}">Watch</a>
+                </div>
+            `;
+        }
+
+        // Load sponsored movies
+        function loadSponsoredMovies() {
+            const sponsoredContainer = document.getElementById('sponsored-movies');
+            const loadingElement = document.getElementById('sponsored-loading');
+            const errorElement = document.getElementById('sponsored-error');
+
+            const sponsoredMovies = Object.entries(videoDatabase).filter(([id, data]) => data.sponsored === true);
+
+            if (sponsoredMovies.length === 0) {
+                loadingElement.style.display = 'none';
+                errorElement.style.display = 'block';
+                errorElement.textContent = 'No sponsored movies available at the moment.';
+                return;
+            }
+
+            let moviesHTML = '';
+            sponsoredMovies.forEach(([movieId, movieData]) => {
+                moviesHTML += createMovieCard(movieId, movieData);
+            });
+
+            sponsoredContainer.innerHTML = moviesHTML;
+            loadingElement.style.display = 'none';
+
+            // Animate movie cards
+            setTimeout(() => {
+                const cards = sponsoredContainer.querySelectorAll('.movie-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('loaded');
+                    }, index * 100);
+                });
+            }, 100);
+        }
+
+        // Load all movies for discover section
+        function loadDiscoverMovies() {
+            const discoverContainer = document.getElementById('discover-movies');
+            const loadingElement = document.getElementById('discover-loading');
+            const errorElement = document.getElementById('discover-error');
+
+            const allMovies = Object.entries(videoDatabase);
+
+            if (allMovies.length === 0) {
+                loadingElement.style.display = 'none';
+                errorElement.style.display = 'block';
+                return;
+            }
+
+            let moviesHTML = '';
+            // Show max 6 movies in discover section
+            allMovies.slice(0, 6).forEach(([movieId, movieData]) => {
+                moviesHTML += createMovieCard(movieId, movieData);
+            });
+
+            discoverContainer.innerHTML = moviesHTML;
+            loadingElement.style.display = 'none';
+
+            // Animate movie cards
+            setTimeout(() => {
+                const cards = discoverContainer.querySelectorAll('.movie-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('loaded');
+                    }, index * 100);
+                });
+            }, 100);
+        }
+
+        // Initialize movies sections
+        async function initializeMovies() {
+            const dbLoaded = await loadVideoDatabase();
+            
+            if (!dbLoaded) {
+                // Show error messages
+                document.getElementById('sponsored-loading').style.display = 'none';
+                document.getElementById('sponsored-error').style.display = 'block';
+                document.getElementById('discover-loading').style.display = 'none';
+                document.getElementById('discover-error').style.display = 'block';
+                return;
+            }
+
+            // Load movies sections
+            loadSponsoredMovies();
+            loadDiscoverMovies();
+        }
+
+        // Cookie functions
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
             if (parts.length === 2) return parts.pop().split(';').shift();
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        // User authentication display
+        function updateUserInterface() {
             const username = getCookie('username');
             const navSignin = document.getElementById('nav-signin');
             const navSignup = document.getElementById('nav-signup');
@@ -110,28 +265,30 @@
             const navUsername = document.getElementById('nav-username');
 
             if (username) {
-                // User is logged in
                 navSignin.style.display = 'none';
                 navSignup.style.display = 'none';
-                navUser.style.display = 'flex'; // Display the user section
+                navUser.style.display = 'flex';
                 navUsername.textContent = username;
             } else {
-                // User is not logged in
                 navSignin.style.display = 'inline-block';
                 navSignup.style.display = 'inline-block';
-                navUser.style.display = 'none'; // Hide the user section
+                navUser.style.display = 'none';
             }
 
-            // Logout button functionality
+            // Logout functionality
             const logoutBtn = document.getElementById('logout-btn');
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', function() {
-                    // Clear the username cookie (replace 'username' with your cookie name)
                     document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-                    // Reload the page or redirect to logout page as needed
-                    location.reload(); // For demonstration; replace with actual redirect logic
+                    location.reload();
                 });
             }
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserInterface();
+            initializeMovies();
         });
     </script>
 </body>
