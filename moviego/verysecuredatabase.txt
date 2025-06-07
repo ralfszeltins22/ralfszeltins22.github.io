@@ -1,7 +1,6 @@
 {
     "admin": "admin",
     "spoinko": "bomzis123",
-    "rudis": "rudis123",
     "edijs": "edinspedins",
     "username": "password",
     "bob": "bob"
