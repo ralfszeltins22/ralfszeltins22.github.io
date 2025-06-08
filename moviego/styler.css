@@ -227,12 +227,14 @@ nav ul li a:hover::after {
 
 .movie-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 32px;
+    grid-template-columns: repeat(auto-fill, 220px); /* Fixed width cards */
+    gap: 24px;
     max-width: 1200px;
     margin: 0 auto;
+    justify-content: start; /* Align cards to the left */
 }
 
+/* FIXED: Movie card structure with consistent height and proper image aspect ratio */
 .movie-card {
     background: var(--card-bg);
     border-radius: 20px;
@@ -242,6 +244,9 @@ nav ul li a:hover::after {
     position: relative;
     opacity: 0;
     transform: translateY(30px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .movie-card.loaded {
@@ -272,10 +277,19 @@ nav ul li a:hover::after {
     border-color: rgba(99, 102, 241, 0.3);
 }
 
+.movie-card .image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    background: var(--border-color); /* Fallback background */
+}
+
 .movie-card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: cover; /* Maintains aspect ratio while covering the container */
+    object-position: center; /* Centers the image */
     transition: transform 0.4s ease;
 }
 
@@ -283,33 +297,44 @@ nav ul li a:hover::after {
     transform: scale(1.05);
 }
 
+/* FIXED: Content area with consistent spacing */
+.movie-card .content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 12px;
+}
+
 .movie-card h3 {
     font-size: 20px;
     font-weight: 600;
-    margin: 20px 20px 8px;
     color: var(--text-primary);
     line-height: 1.3;
+    margin: 0;
 }
 
 .movie-card p {
     font-size: 14px;
     color: var(--text-muted);
-    margin: 0 20px 16px;
     line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin: 0;
+    flex-grow: 1; /* Takes up available space */
 }
 
-.movie-card > div {
-    margin: 0 20px 16px;
+/* FIXED: Movie metadata with consistent spacing */
+.movie-card .movie-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin: 8px 0;
 }
 
-.movie-card > div span {
+.movie-card .movie-meta span {
     background: rgba(99, 102, 241, 0.1);
     color: var(--accent-color);
     padding: 4px 8px;
@@ -317,6 +342,12 @@ nav ul li a:hover::after {
     font-size: 12px;
     font-weight: 500;
     border: 1px solid rgba(99, 102, 241, 0.2);
+    white-space: nowrap;
+}
+
+/* FIXED: Watch button always at bottom */
+.movie-card .watch-button {
+    margin-top: auto; /* Pushes button to bottom */
 }
 
 .movie-card a {
@@ -330,6 +361,7 @@ nav ul li a:hover::after {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    border-radius: 16px;
 }
 
 .movie-card a::before {
@@ -467,7 +499,6 @@ nav ul li a:hover::after {
     font-size: 14px;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .container {
         padding: 0 16px;
@@ -493,8 +524,9 @@ nav ul li a:hover::after {
     }
     
     .movie-list {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(auto-fill, 200px); /* Slightly smaller for tablets */
+        gap: 20px;
+        justify-content: start;
     }
     
     .genres, .about {
@@ -521,7 +553,13 @@ nav ul li a:hover::after {
     }
     
     .movie-list {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, 160px); /* Fixed mobile size */
+        gap: 16px;
+        justify-content: start;
+    }
+    
+    .movie-card .content {
+        padding: 16px;
+        gap: 10px;
     }
 }

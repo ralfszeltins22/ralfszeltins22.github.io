@@ -148,17 +148,25 @@
             }
         }
 
-        // Create movie card HTML
+        // FIXED: Create movie card HTML with proper structure
         function createMovieCard(movieId, movieData) {
             return `
                 <div class="movie-card">
-                    <img src="${movieData.poster || 'video/default-poster.png'}" alt="${movieData.title}" onerror="this.src='video/default-poster.png'">
-                    <h3>${movieData.title}</h3>
-                    <p>${movieData.description}</p>
-                    <div style="margin: 10px 0; font-size: 14px; color: #aaa;">
-                        <span>${movieData.year} • ${movieData.genre} • ${movieData.rating}</span>
+                    <div class="image-container">
+                        <img src="${movieData.poster || 'video/default-poster.png'}" alt="${movieData.title}" onerror="this.src='video/default-poster.png'">
                     </div>
-                    <a href="video.html?v=${movieId}">Watch</a>
+                    <div class="content">
+                        <h3>${movieData.title}</h3>
+                        <p>${movieData.description}</p>
+                        <div class="movie-meta">
+                            <span>${movieData.year || 'N/A'}</span>
+                            <span>${movieData.genre || 'Unknown'}</span>
+                            <span>${movieData.rating || 'NR'}</span>
+                        </div>
+                        <div class="watch-button">
+                            <a href="video.html?v=${movieId}">Watch</a>
+                        </div>
+                    </div>
                 </div>
             `;
         }
