@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>E-Klase Refresh</title>
+    <style>
+        /* --- Basic Reset --- */
+        *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+        body{background:#fafbfc;color:#333;line-height:1.6;padding:40px 20px}
+
+        /* --- Hero Section --- */
+        .hero{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:800px;margin:0 auto}
+        .hero h1{font-size:2.5rem;margin-bottom:.5rem;color:#4D7AEC}
+        .hero p{font-size:1.125rem;color:#555;margin-bottom:2rem}
+        .btn{background:#4D7AEC;color:#fff;padding:14px 28px;border-radius:8px;font-weight:600;text-decoration:none;transition:background .2s;margin:8px}
+        .btn:hover{background:#2563EB}
+        .btn.chrome{background:#4285F4}
+        .btn.chrome:hover{background:#3367D6}
+        .btn.firefox{background:#FF7139}
+        .btn.firefox:hover{background:#E66000}
+
+        /* --- Features --- */
+        .features{margin:80px auto;max-width:1000px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px}
+        .feature{background:#fff;border-radius:12px;padding:30px;box-shadow:0 4px 12px rgba(0,0,0,.05);text-align:center}
+        .feature h3{margin:16px 0 8px;font-size:1.25rem;color:#333}
+        .feature p{font-size:.95rem;color:#666}
+
+        /* --- More Content --- */
+        .more-content{max-width:800px;margin:80px auto;text-align:left}
+        .more-content h2{color:#4D7AEC;margin-bottom:16px}
+        .more-content p{margin-bottom:12px}
+
+        /* --- Footer --- */
+        footer{margin-top:100px;text-align:center;font-size:.875rem;color:#999}
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>E-Klase Refresh</h1>
+        <p>Modern, clean, and fast styling for the legacy E-Klase portal. One click and your dashboard feels brand-new.</p>
+
+        <!-- CSS download -->
+        <a id="downloadBtn" class="btn" href="https://raw.githubusercontent.com/ralfszeltins22/ralfszeltins22.github.io/refs/heads/main/eklase-refresh/eklase_refresh-alpha_0.0.2.css" download="eklase_refresh-alpha_0.0.2.css">Download CSS</a>
+
+        <!-- Stylus links -->
+        <a class="btn chrome" href="https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne" target="_blank" rel="noopener">Get Stylus for Chrome</a>
+        <a class="btn firefox" href="https://addons.mozilla.org/en-US/firefox/addon/styl-us/" target="_blank" rel="noopener">Get Stylus for Firefox</a>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <h3>Lightweight</h3>
+            <p>Only ~25 KB of pure CSS—no JavaScript, no trackers, no bloat.</p>
+        </div>
+        <div class="feature">
+            <h3>Responsive</h3>
+            <p>Looks great on phones, tablets and widescreen desktops with zero extra work.</p>
+        </div>
+        <div class="feature">
+            <h3>Consistent</h3>
+            <p>Unified colors, rounded corners, and smooth hover effects across every page.</p>
+        </div>
+    </section>
+
+    <section class="more-content">
+        <h2>How to install in three easy steps</h2>
+        <p>1. Install Stylus for <a href="https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne" target="_blank">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/styl-us/" target="_blank">Firefox</a>.</p>
+        <p>2. Click “Download CSS” above and save the file somewhere handy.</p>
+        <p>3. Open Stylus → “Write style for e-klase.lv” → paste the CSS → save. Done!</p>
+
+        <h2>What’s new in Alpha 0.0.2</h2>
+        <p>• Darker, more readable text on light backgrounds.<br/>
+           • Rounded buttons and cards for a softer look.<br/>
+           • Slimmer sidebar on desktop to give content more room.<br/>
+           • Faster loading—unused rules were stripped out.</p>
+
+        <h2>Need help or want to contribute?</h2>
+        <p>Found a bug or have a suggestion? Head over to our <a href="https://github.com/ralfszeltins22/eklase-refresh/issues" target="_blank" rel="noopener">GitHub Issues</a> page and open a ticket. Pull requests are welcome!</p>
+    </section>
+
+    <footer>
+        Made with ❤️ by the community, for the community.<br/>
+        Alpha 0.0.2 – expect frequent updates.
+    </footer>
+
+    <script>
+        const btn = document.getElementById('downloadBtn');
+        btn.addEventListener('click', () => {
+            btn.textContent = '✔ Downloaded';
+            setTimeout(() => btn.textContent = 'Download CSS', 3000);
+        });
+    </script>
+</body>
+</html>
