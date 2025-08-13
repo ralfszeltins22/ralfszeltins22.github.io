@@ -281,7 +281,7 @@
                 button.textContent = 'Ielādē...';
                 button.disabled = true;
                 
-                const response = await fetch('https://raw.githubusercontent.com/ralfszeltins22/ralfszeltins22.github.io/refs/heads/main/eklase-refresh/eklase_refresh-alpha_0.0.2.css');
+                const response = await fetch('https://raw.githubusercontent.com/ralfszeltins22/ralfszeltins22.github.io/refs/heads/main/eklase-refresh/eklase_refresh.css');
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -319,7 +319,7 @@
             
             try {
                 cssContent.textContent = 'Ielādē kodu...';
-                const response = await fetch('https://raw.githubusercontent.com/ralfszeltins22/ralfszeltins22.github.io/refs/heads/main/eklase-refresh/eklase_refresh-alpha_0.0.2.css');
+                const response = await fetch('https://raw.githubusercontent.com/ralfszeltins22/ralfszeltins22.github.io/refs/heads/main/eklase-refresh/eklase_refresh.css');
                 
                 if (response.ok) {
                     const cssText = await response.text();
