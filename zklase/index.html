@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Klase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #4D7AEC, #2563eb);
+            border-radius: 24px;
+            margin: 0 auto 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo-img {
+            width: 114px;
+            height: 114px;
+            border-radius: 22px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #4D7AEC, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            color: #d0d0d0;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .download-section {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 32px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            min-width: 220px;
+            justify-content: center;
+        }
+
+        .download-btn.android {
+            background-color: #4D7AEC;
+            color: white;
+        }
+
+        .download-btn.android:hover {
+            background-color: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(77, 122, 236, 0.4);
+        }
+
+        .download-btn.ios {
+            background-color: #333;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .download-btn.ios:hover {
+            background-color: #444;
+        }
+
+        .platform-icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .features {
+            margin-top: 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(77, 122, 236, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-item h4 {
+            color: #4D7AEC;
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            color: #b0b0b0;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .footer {
+            margin-top: 120px;
+            padding-top: 40px;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 400px;
+            max-width: 500px;
+        }
+
+        .popup h3 {
+            color: #4D7AEC;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .popup p {
+            color: #d0d0d0;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .popup-close {
+            background-color: #4D7AEC;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-close:hover {
+            background-color: #2563eb;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 20px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .download-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .download-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .popup {
+                min-width: 320px;
+                margin: 20px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo"><img class="logo-img" src="zklase.png"></div>
+        
+        <h1>Z-Klase</h1>
+        <p class="subtitle">Atgriež atpakaļ oriģinālo E-Klasi</p>
+        
+        <p class="description">
+            Z-Klase atgriež atpakaļ oriģinālo E-Klasi, un tiek atjaunota bieži, lai atbalstītu visus telefonus.
+        </p>
+
+        <div class="download-section">
+            <a href="https://example.com" class="download-btn android">
+                <svg class="platform-icon" viewBox="0 0 24 24">
+                    <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1518-.5972.416.416 0 00-.5972.1519l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1333 1.0989L4.8442 5.4467a.4161.4161 0 00-.5972-.1519.416.416 0 00-.1518.5972l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.1185-9.4396"/>
+                </svg>
+                Lejupielādēt priekš Android
+            </a>
+            <div class="download-btn ios" onclick="showPopup()">
+                <svg class="platform-icon" viewBox="0 0 24 24">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Lejupielādēt priekš iOS
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-item">
+                <h4>Kāpēc Z-Klase nav pieejama uz Google Play</h4>
+                <p>Lai publicētu lietotni Google Play, ir jāmaksā 25 EUR, un es to nevēlos maksāt.</p>
+            </div>
+            <div class="feature-item">
+                <h4>Kāpēc rāda, ka lietotne var būt vīruss</h4>
+                <p>Lietotne ir tikko uztaisīta, un nav bieži instalēta. Dēļ tā, Google Play Protect brīdina par lietotni, ka tā nav bieži lejupielādēta.</p>
+            </div>
+            <div class="feature-item">
+                <h4>Kad Z-Klase būs pieejama uz iOS</h4>
+                <p>iOS atbalstu ir grūtāk izstrādāt, un arī nebūs pieejams uz Apple App Store. Šobrīd nav zināms, kad iznāks Z-Klase iOS.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Made by ralfszeltins2 | ralfszeltins22.github.io</p>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popupOverlay" onclick="hidePopup()">
+        <div class="popup" onclick="event.stopPropagation()">
+            <h3>Coming Soon</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. iOS version isn't available at this time.</p>
+            <button class="popup-close" onclick="hidePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById('popupOverlay').style.display = 'block';
+        }
+
+        function hidePopup() {
+            document.getElementById('popupOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
