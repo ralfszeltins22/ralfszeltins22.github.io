@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -252,30 +253,72 @@
             }
         }
 
+        .warning_new-zklase {
+            position: relative;
+            width: 100%;
+            align-self: center;
+            padding: 20px;
+            align-items: center;
+        }
 
+        .warn-zklase-inner {
+            border-radius: 18px;
+            background-color: #e0101080;
+            width: 100%;
+            padding: 5px;
+            padding-left: 16px;
+            padding-right: 16px;
+            text-align: center;
+            color: #ff9b9b;
+        }
+
+        .warn-zklase-inner > a {
+            color: #ff9b9b !important;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: all 0.1s ease;
+        }
+
+        .warn-zklase-inner > a:hover {
+            color: #ff7575 !important;
+            font-weight: 600;
+            text-decoration: underline;
+
+        }
     </style>
 </head>
+
 <body>
+    <div class="warning_new-zklase">
+        <div class="warn-zklase-inner">
+            <p><b>Uzmanību!</b> Z-Klase ar nākamo atjauninājumu vairs neatgriezīs veco E-Klasi. Plānots Z-Klasi pārvērst
+                par E-Klasi, kurai ir Ģimenes Komplekta rīki par brīvu. </p><a href="demo">Atvērt demonstrācijas versiju
+                (nepabeigta)</a>
+        </div>
+    </div>
     <div class="container">
         <div class="logo"><img class="logo-img" src="zklase.png"></div>
-        
+
         <h1>Z-Klase</h1>
         <p class="subtitle">Atgriež atpakaļ oriģinālo E-Klasi</p>
-        
+
         <p class="description">
             Z-Klase atgriež atpakaļ oriģinālo E-Klasi, un tiek atjaunota bieži, lai atbalstītu visus telefonus.
         </p>
 
         <div class="download-section">
-            <a href="https://raw.githubusercontent.com/ralfszeltins22/ralfszeltins22.github.io/refs/heads/main/zklase/ZKlase.apk" class="download-btn android">
+            <a href="https://raw.githubusercontent.com/ralfszeltins22/ralfszeltins22.github.io/refs/heads/main/zklase/ZKlase.apk"
+                class="download-btn android">
                 <svg class="platform-icon" viewBox="0 0 24 24">
-                    <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1518-.5972.416.416 0 00-.5972.1519l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1333 1.0989L4.8442 5.4467a.4161.4161 0 00-.5972-.1519.416.416 0 00-.1518.5972l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.1185-9.4396"/>
+                    <path
+                        d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1518-.5972.416.416 0 00-.5972.1519l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1333 1.0989L4.8442 5.4467a.4161.4161 0 00-.5972-.1519.416.416 0 00-.1518.5972l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.761h24c-.3435-4.1021-2.6892-7.5743-6.1185-9.4396" />
                 </svg>
                 Lejupielādēt priekš Android
             </a>
             <div class="download-btn ios" onclick="showPopup()">
                 <svg class="platform-icon" viewBox="0 0 24 24">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    <path
+                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                 </svg>
                 Lejupielādēt priekš iOS
             </div>
@@ -288,11 +331,13 @@
             </div>
             <div class="feature-item">
                 <h4>Kāpēc rāda, ka lietotne var būt vīruss</h4>
-                <p>Lietotne ir tikko uztaisīta, un nav bieži instalēta. Dēļ tā, Google Play Protect brīdina par lietotni, ka tā nav bieži lejupielādēta.</p>
+                <p>Lietotne ir tikko uztaisīta, un nav bieži instalēta. Dēļ tā, Google Play Protect brīdina par
+                    lietotni, ka tā nav bieži lejupielādēta.</p>
             </div>
             <div class="feature-item">
                 <h4>Kad Z-Klase būs pieejama uz iOS</h4>
-                <p>iOS atbalstu ir grūtāk izstrādāt, un arī nebūs pieejams uz Apple App Store. Šobrīd nav zināms, kad iznāks Z-Klase iOS.</p>
+                <p>iOS atbalstu ir grūtāk izstrādāt, un arī nebūs pieejams uz Apple App Store. Šobrīd nav zināms, kad
+                    iznāks Z-Klase iOS.</p>
             </div>
         </div>
 
@@ -320,4 +365,5 @@
         }
     </script>
 </body>
+
 </html>

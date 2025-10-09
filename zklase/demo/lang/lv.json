@@ -1,0 +1,14 @@
+{
+  "app_name": "Z-Klase",
+  "username": "Lietotājvārds",
+  "password": "Parole",
+  "login": "Pieteikties",
+  "toggle_theme": "Gaišs",
+  "language_sw": "English",
+  "footer": "Z-Klase Prototips - Taisīja @ralfszeltins2",
+  "home": "Sākums",
+  "diary": "Dienasgrāmata",
+  "reports": "Pārskati",
+  "grades": "Vērtējumi",
+  "absences": "Kavējumi"
+}

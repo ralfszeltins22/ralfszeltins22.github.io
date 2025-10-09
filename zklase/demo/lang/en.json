@@ -1,0 +1,14 @@
+{
+  "app_name": "Z-Klase",
+  "username": "Username",
+  "password": "Password",
+  "login": "Login",
+  "toggle_theme": "Light",
+  "language_sw": "Latviešu",
+  "footer": "Z-Klase Prototype - Made by @ralfszeltins2",
+  "home": "Home",
+  "diary": "Diary",
+  "reports": "Reports",
+  "grades": "Grades",
+  "absences": "Absences"
+}
