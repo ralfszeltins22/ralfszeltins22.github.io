@@ -8,28 +8,43 @@
 
 body {
     background: var(--bg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: var(--text);
     transition: background 0.3s, color 0.3s;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(32px);
+}
+
+body.home {
+    background: var(--bg-home);
 }
 
 :root {
     --bg: #f9f9f9;
+    --bg-transparent: #f9f9f980;
     --text: #222;
     --text-secondary: #303030;
     --card-bg: #fff;
+    --card-bg-transparent: #ffffff60;
     --card-border: #ddd;
     --primary: #6366f1;
     --primary-hover: #5856eb;
     --secondary: #f8f8f8;
     --secondary-hover: #eee;
     --secondary-border: #dadada;
+    --secondary-transparent: #f8f8f880;
+    --secondary-hover-transparent: #eeeeee80;
+    --secondary-border-transparent: #cacaca80;
     --success: #10b981;
     --error: #ef4444;
     --border: #374151;
+    --border-transparent: #37415160;
     --shadow: rgba(0, 0, 0, 0.3);
+    --bg-home: url(images/home_background_light.png);
     --full-logo-wide: url(images/big_black.png);
     --full-logo: url(images/long_black.png);
 
@@ -37,21 +52,28 @@ body {
 
 body.dark {
     --bg: #121212;
+    --bg-transparent: #12121280;
     --text: #f1f1f1;
     --text-secondary: #b4b4d4;
     --card-bg: #1e1e1e;
+    --card-bg-transparent: #1e1e1e60;
     --card-border: #333;
     --primary: #6f00ff;
     --primary-hover: #7f1dff;
     --secondary: #2e2e2e;
     --secondary-hover: #3a3a3a;
     --secondary-border: #444;
+    --secondary-transparent: #2e2e2e60;
+    --secondary-hover-transparent: #3a3a3a60;
+    --secondary-border-transparent: #44444460;
     --success: #10b981;
     --error: #ef4444;
     --border: #e2e8f0;
+    --border-transparent: #e2e8f080;
     --shadow: rgba(0, 0, 0, 0.3);
     --full-logo-wide: url(images/big_white.png);
     --full-logo: url(images/long_light.png);
+    --bg-home: url(images/home_background.png);
 }
 
 /* ===== Cards ===== */
@@ -232,6 +254,128 @@ button.primary:hover {
     margin: 0;
 }
 
+/* ==== Homepage ==== */
+
+.homeheader {
+    background-color: var(--card-bg-transparent);
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.home-header-logo {
+    background: var(--full-logo);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 36px;
+    margin: 17px;
+    width: 256px;
+}
+
+.homepage-header-a {
+    margin-right: 40px;
+    text-decoration: none;
+    color: var(--text) !important;
+}
+
+.header-links {
+    display: flex;
+    align-items: center;
+}
+
+.home-main {
+    flex: 1;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+}
+
+.home-login-right-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.home-login-form {
+    background: var(--card-bg-transparent);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 320px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 100px;
+}
+
+.homefooter {
+    background: var(--card-bg-transparent);
+}
+
+.footer-btn-home {
+    background-color: var(--secondary-transparent);
+    padding: 0.4rem;
+    color: var(--text);
+    border: 2px solid var(--secondary-border-transparent);
+    border-radius: 8px;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.footer-btn-home:hover {
+    background-color: var(--secondary-hover-transparent);
+    padding: 0.4rem;
+    color: var(--text);
+    border: 2px solid var(--secondary-border-transparent);
+    border-radius: 8px;
+}
+
+.home-login-form input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--card-border);
+    border-radius: 0.5rem;
+    background: var(--bg-transparent);
+    color: var(--text);
+}
+
+.home-left-part {
+    margin-left: 100px;
+    margin-right: 50px;
+}
+
+.home-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.home-description {
+    font-size: 1.25rem;
+}
+
+.home-login-big {
+    background: var(--primary);
+    color: white;
+    padding: 0.7rem 40px;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+
+.home-login-big:hover {
+    background: var(--primary-hover);
+}
 
 /* Tablet & Mobile UI */
 @media screen and (max-width: 768px) {
@@ -266,4 +410,9 @@ button.primary:hover {
         background: var(--card-bg);
         margin-top: 2px;
     }
+}
+
+.debug {
+    background-color: #ff000080;
+    border: 1px solid #00ff00;
 }

@@ -2,47 +2,62 @@
 <html lang="lv">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Z-Klase</title>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100;300;400;500;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Z-Klase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100;300;400;500;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="dark">
-    <header class="loginheader">
-        <div class="login-header-logo"></div>
-        <p data-i18n="login-header-announcement"></p>
-    </header>
-  <main class="login-center-card">
-    <form id="loginForm" class="login-form" autocomplete="off">
-      <div class="zklase-loginform-image"></div>
-      <p data-i18n="login_tip" class="login-tip">Ievadi jebkādu tekstu lai pieslēgtos. Lūdzu neievadiet savu īsto lietotājvārdu vai paroli!</p>
-      <label>
-        <span data-i18n="username">Lietotājvārds</span>
-        <input type="text" name="username" required />
-      </label>
-      <label>
-        <span data-i18n="password">Parole</span>
-        <input type="password" name="password" required />
-      </label>
-      <label class="remember-me">
-        <input type="checkbox" name="remember_me" value="true" />
-        <span data-i18n="remember_me">Atcerēties mani</span>
-      </label>
-      <button data-i18n="login_btn" type="submit" class="primary">Pieslēgties</button>
-    </form>
+<body class="dark home">
+  <header class="homeheader">
+    <div class="home-header-logo"></div>
+    <div class="header-links">
+      <a href="#" data-i18n="download_btn" class="homepage-header-a">Lejupielādēt</a>
+    </div>
+  </header>
+  <!-- <p data-i18n="login-header-announcement"></p> -->
+  <main class="home-main">
+    <div class="home-left-part">
+      <h1 data-i18n="home_text_title" class="home-title">Z-Klase - labāka E-Klase</h1>
+      <p data-i18n="home_text_1" class="home-description">Z-Klase ir labāka versija no E-Klases, kurai ir pieejamas Ģimenes Komplekta funkcijas bezmaksas.</p>
+      <p data-i18n="home_text_2" class="home-description">Šeit var labāk pārskatīt sekmes, uzvedību un pārējo, nemaksājot.</p>
+      <p data-i18n="home_text_3" class="home-description">Ir pieejams tumšais režīms priekš tiem, kuri nevēlas gaišo režīmu.</p>
+      <br>
+      <p data-i18n="home_text_4" class="home-description">Sāciet izmantot Z-Klasi jau šodien!</p>
+      <br><br>
+      <a data-i18n="login_btn" href="login.html" class="home-login-big">Pieslēgties</a>
+    </div>
+    <div class="home-login-right-card">
+      <form id="loginForm" class="home-login-form" autocomplete="off">
+        <div class="zklase-loginform-image"></div>
+        <p data-i18n="login_tip" class="login-tip">Login nestrādā</p>
+        <label>
+          <span data-i18n="username">Lietotājvārds</span>
+          <input type="text" name="username" required />
+        </label>
+        <label>
+          <span data-i18n="password">Parole</span>
+          <input type="password" name="password" required />
+        </label>
+        <label class="remember-me">
+          <input type="checkbox" name="remember_me" value="true" />
+          <span data-i18n="remember_me">Atcerēties mani</span>
+        </label>
+        <button data-i18n="login_btn" type="submit" class="primary">Pieslēgties</button>
+      </form>
+    </div>
 
   </main>
-  <footer class="footer">
+  <footer class="footer homefooter">
     <div class="row bottom-controls">
-      <button id="themeToggle" class="footer-btn-login" data-i18n="toggle_theme">Tumšs</button>
-      <button id="langToggle" class="footer-btn-login" data-i18n="language_sw">English</button>
+      <button id="themeToggle" class="footer-btn-home" data-i18n="toggle_theme">Tumšs</button>
+      <button id="langToggle" class="footer-btn-home" data-i18n="language_sw">English</button>
     </div>
     <div data-i18n="footer">Z-Klase - taisīja @ralfszeltins2</div>
   </footer>
-    <script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
