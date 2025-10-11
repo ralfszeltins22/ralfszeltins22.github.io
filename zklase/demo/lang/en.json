@@ -2,13 +2,16 @@
   "app_name": "Z-Klase",
   "username": "Username",
   "password": "Password",
-  "login": "Login",
+  "login_btn": "Login",
   "toggle_theme": "Light",
   "language_sw": "Latviešu",
-  "footer": "Z-Klase Prototype - Made by @ralfszeltins2",
+  "footer": "Z-Klase Demo v0.0.2 - Made by @ralfszeltins2",
   "home": "Home",
   "diary": "Diary",
   "reports": "Reports",
   "grades": "Grades",
-  "absences": "Absences"
+  "absences": "Absences",
+  "remember_me": "Remember me",
+  "login-header-announcement": "Welcome to Z-Klase! Z-Klase is also available here: https://z-klase.ddns.net",
+  "login_tip": "Enter something random to log in. Please don't enter your real username and password!"
 }

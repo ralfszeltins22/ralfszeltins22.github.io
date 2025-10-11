@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // Function to detect mobile devices
+        function isMobileDevice() {
+            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('Mobi') !== -1);
+        }
+
+        // Redirect based on the device type
+        if (isMobileDevice()) {
+            window.location.href = 'mobile'; // Redirect to mobile.html for mobile devices
+        } else {
+            window.location.href = 'home'; // Redirect to home.html for other devices
+        }
+    </script>
+</head>
+<body>
+    <!-- Your webpage content, or you can leave this section blank -->
+</body>
+</html>

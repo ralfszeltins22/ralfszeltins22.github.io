@@ -1,0 +1,35 @@
+{
+    "autism-crime": {
+        "title": "Autism Crime",
+        "description": "A 12 year old boy who seems to be an autist - lost in the future with other people.",
+        "year": "2023",
+        "genre": "Drama",
+        "duration": "1h 32m",
+        "rating": "PG-13",
+        "poster": "video/autism_crime.png",
+        "mp4": "video/autism-crime.mp4",
+        "sponsored": true
+    },
+    "sharknado-2013": {
+        "title": "Sharknado (2013)",
+        "description": "When a freak hurricane swamps Los Angeles, nature's deadliest killer rules sea, land, and air as thousands of sharks terrorize the waterlogged populace.",
+        "year": "2013",
+        "genre": "Action/Comedy",
+        "duration": "1h 26m",
+        "rating": "TV-14",
+        "poster": "video/sharknado-2013.png",
+        "mp4": "video/sharknado-2013.mp4",
+        "sponsored": true
+    },
+    "example-movie": {
+        "title": "Sample movie",
+        "description": "Test movie that isn't set as sponsored.",
+        "year": "2028",
+        "genre": "Sample",
+        "duration": "5 sec",
+        "rating": "PG-13",
+        "poster": "video/sharknado-2013.png",
+        "mp4": "video/sample.mp4",
+        "sponsored": false
+    }
+}

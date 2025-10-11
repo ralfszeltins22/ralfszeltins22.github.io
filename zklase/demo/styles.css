@@ -54,47 +54,6 @@ body.dark {
     --full-logo: url(images/long_light.png);
 }
 
-/* ===== Layout ===== */
-.topbar {
-    background: var(--card-bg);
-    padding: 1rem;
-    border-bottom: 1px solid var(--card-border);
-}
-
-.sidebar {
-    width: 220px;
-    background: var(--card-bg);
-    border-right: 1px solid var(--card-border);
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-}
-
-.sidebar nav a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem;
-    color: var(--text);
-    text-decoration: none;
-    border-radius: 0.5rem;
-    margin-bottom: 0.3rem;
-}
-
-.sidebar nav a.active,
-.sidebar nav a:hover {
-    background: var(--primary);
-    color: white;
-}
-
-.dashboard {
-    margin-left: 220px;
-    padding: 1rem;
-    flex: 1;
-}
-
 /* ===== Cards ===== */
 .cards {
     display: grid;
@@ -116,14 +75,14 @@ body.dark {
 }
 
 /* ===== Login ===== */
-.center-card {
+.login-center-card {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.form {
+.login-form {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 2rem;
@@ -135,7 +94,7 @@ body.dark {
     gap: 1rem;
 }
 
-.form input {
+.login-form input {
     width: 100%;
     padding: 0.6rem;
     border: 1px solid var(--card-border);
@@ -190,8 +149,11 @@ button.primary:hover {
     }
 }
 
-/* ===== Unsorted shit ===== */
+/* ===== Unsorted stuff (yes im too lazy to sort this mess) ===== */
 
+.login-tip {
+    text-align: center;
+}
 
 .footer-btn-login {
     background-color: var(--secondary);
@@ -250,15 +212,58 @@ button.primary:hover {
     background-color: var(--card-bg);
     height: 70px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--card-border);
 }
+
 
 .login-header-logo {
     background: var(--full-logo);
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: middle;
+    background-position: center;
     height: 36px;
-    vertical-align: middle;
     margin: 17px;
-    width: 360px;
+    width: 256px;
+}
+
+.loginheader>p {
+    margin: 0;
+}
+
+
+/* Tablet & Mobile UI */
+@media screen and (max-width: 768px) {
+    .login-header-logo {
+        display: none;
+    }
+
+    .loginheader>p {
+        margin: 0 10px 0 10px;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/* Mobile UI */
+@media screen and (max-width: 411px) {
+    .login-form {
+        border: none;
+        background-color: var(--bg);
+        padding: 3rem;
+        border-radius: 0px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .zklase-loginform-image {
+        height: 100px;
+        margin-bottom: 25px;
+    }
+
+    .login-form input {
+        background: var(--card-bg);
+        margin-top: 2px;
+    }
 }

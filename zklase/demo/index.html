@@ -13,24 +13,25 @@
 <body class="dark">
     <header class="loginheader">
         <div class="login-header-logo"></div>
+        <p data-i18n="login-header-announcement"></p>
     </header>
-  <main class="center-card">
-    <form id="loginForm" class="form" autocomplete="off">
+  <main class="login-center-card">
+    <form id="loginForm" class="login-form" autocomplete="off">
       <div class="zklase-loginform-image"></div>
-      <p>ievadi random text lai tiktu ieksa</p>
+      <p data-i18n="login_tip" class="login-tip">Ievadi jebkādu tekstu lai pieslēgtos. Lūdzu neievadiet savu īsto lietotājvārdu vai paroli!</p>
       <label>
-        <span>Lietotājvārds</span>
+        <span data-i18n="username">Lietotājvārds</span>
         <input type="text" name="username" required />
       </label>
       <label>
-        <span>Parole</span>
+        <span data-i18n="password">Parole</span>
         <input type="password" name="password" required />
       </label>
       <label class="remember-me">
         <input type="checkbox" name="remember_me" value="true" />
-        <span>Atcerēties mani</span>
+        <span data-i18n="remember_me">Atcerēties mani</span>
       </label>
-      <button type="submit" class="primary">Pieteikties</button>
+      <button data-i18n="login_btn" type="submit" class="primary">Pieslēgties</button>
     </form>
 
   </main>

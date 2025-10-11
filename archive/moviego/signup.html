@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x64dbg.movies - Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="signin">
+        <div class="content">
+            <h2>Sign Up</h2>
+            <form id="signupForm" class="form">
+                <div class="inputBox">
+                    <input type="text" id="newUsername" required />
+                    <i>Username</i>
+                </div>
+                <div class="inputBox">
+                    <input type="password" id="newPassword" required />
+                    <i>Password</i>
+                </div>
+                <div class="inputBox">
+                    <input type="submit" value="Sign Up" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+            
+            const pasteUrl = 'https://example.com/';  // Replace 'PASTE_URL' with your actual paste URL
+
+            fetch(pasteUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Add new user credentials
+                    data[newUsername] = newPassword;
+
+                    // Convert data to JSON string
+                    const updatedData = JSON.stringify(data);
+
+                    // Upload the updated credentials back to the paste service
+                    fetch(pasteUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: updatedData,
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Account created successfully!');
+                            window.location.href = 'index.html';
+                        } else {
+                            alert('Failed to create an account. Please try again.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again later.');
+                });
+        });
+    </script>
+</body>
+</html>

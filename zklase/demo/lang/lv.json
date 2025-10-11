@@ -2,13 +2,16 @@
   "app_name": "Z-Klase",
   "username": "Lietotājvārds",
   "password": "Parole",
-  "login": "Pieteikties",
+  "login_btn": "Pieslēgties",
   "toggle_theme": "Gaišs",
   "language_sw": "English",
-  "footer": "Z-Klase Prototips - Taisīja @ralfszeltins2",
+  "footer": "Z-Klase Demo v0.0.2 - Taisīja @ralfszeltins2",
   "home": "Sākums",
   "diary": "Dienasgrāmata",
   "reports": "Pārskati",
   "grades": "Vērtējumi",
-  "absences": "Kavējumi"
+  "absences": "Kavējumi",
+  "remember_me": "Atcerēties mani",
+  "login-header-announcement": "Sveicināts Z-Klasē! Z-Klase arī pieejama šeit: https://z-klase.ddns.net",
+  "login_tip": "Ievadiet jebkādu tekstu lai pieslēgtos. Lūdzu neievadiet savu īsto lietotājvārdu vai paroli!"
 }

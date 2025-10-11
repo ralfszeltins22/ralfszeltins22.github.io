@@ -1,7 +1,6 @@
 1. Open Powershell as Administrator
 2. Run this command: irm https://get.activated.win | iex
 3. Select the option you want and enjoy!
-!!! Detailed guide: https://massgrave.dev/
 
 =================+==========================+========================================+=======================================
 Activation Type  |  Supported Product       |  Activation Period                     |  Is Internet Needed?
@@ -11,3 +10,7 @@ Ohook	         |  Office	                |  Permanent	                         |
 TSforge	         |  Windows / ESU / Office  |  Permanent	                         |  Yes, needed on build 19041 and later
 KMS38	         |  Windows 10-11-Server	|  Till the Year 2038                    |	No
 Online KMS       |  Windows / Office        |  180 Days. Lifetime With Renewal Task	 |  Yes
+
+!!! Detailed guide: https://massgrave.dev/
+!!! Detailed guide: https://massgrave.dev/
+!!! Detailed guide: https://massgrave.dev/
