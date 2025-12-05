@@ -3,6 +3,6 @@
     "firstName": "Reinis",
     "lastName": "Kārkliņš",
     "schoolName": "Jelgavas 4. vidusskola",
-    "reason": "aped ziepes un izdzes zklasi"
+    "reason": "tev mazins"
   }
 ]
