@@ -4,5 +4,11 @@
     "lastName": "Drande",
     "schoolName": "Jelgavas 4. vidusskola",
     "reason": "."
+  },
+  {
+    "firstName": "Ralfs",
+    "lastName": "Zeltiņš",
+    "schoolName": "Jelgavas 4. vidusskola",
+    "reason": "test"
   }
 ]
