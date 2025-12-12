@@ -3,12 +3,12 @@
     "firstName": "Kārlis",
     "lastName": "Drande",
     "schoolName": "Jelgavas 4. vidusskola",
-    "reason": "."
+    "reason": "sanem"
   },
   {
-    "firstName": "Ralfs",
-    "lastName": "Zeltiņš",
-    "schoolName": "Jelgavas 4. vidusskola",
-    "reason": "test"
+    "firstName": "Muris",
+    "lastName": "Bārdnieks",
+    "schoolName": "Jelgavas 67. sākumskola",
+    "reason": "Nedrikst"
   }
 ]
