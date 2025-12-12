@@ -1,8 +1,8 @@
 [
   {
-    "firstName": "Muris",
-    "lastName": "Krutais",
-    "schoolName": "Jelgavas kaķu skola",
-    "reason": "tev mazins"
+    "firstName": "Kārlis",
+    "lastName": "Drande",
+    "schoolName": "Jelgavas 4. vidusskola",
+    "reason": "."
   }
 ]
