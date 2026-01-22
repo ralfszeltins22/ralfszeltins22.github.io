@@ -6,6 +6,12 @@
     "reason": "."
   },
   {
+    "firstName": "Edijs",
+    "lastName": "Kārklis",
+    "schoolName": "Jelgavas 4. vidusskola",
+    "reason": "."
+  },
+  {
     "firstName": "Muris",
     "lastName": "Bārdnieks",
     "schoolName": "Jelgavas 67. sākumskola",
