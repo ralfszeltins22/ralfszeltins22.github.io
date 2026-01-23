@@ -1,8 +1,8 @@
 [
   {
-    "firstName": "Kārlis",
-    "lastName": "Drande",
-    "schoolName": "Jelgavas 4. vidusskola",
+    "firstName": "neKārlis",
+    "lastName": "neDrande",
+    "schoolName": "neJelgavas 4. vidusskola",
     "reason": "."
   },
   {
