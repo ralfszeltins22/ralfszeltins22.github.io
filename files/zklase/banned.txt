@@ -6,9 +6,9 @@
     "reason": "."
   },
   {
-    "firstName": "neEdijs",
-    "lastName": "neKārklis",
-    "schoolName": "neJelgavas 4. vidusskola",
+    "firstName": "Edijs",
+    "lastName": "Kārklis",
+    "schoolName": "Jelgavas 4. vidusskola",
     "reason": "."
   },
   {
