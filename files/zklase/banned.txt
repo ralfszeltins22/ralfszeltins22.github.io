@@ -1,15 +1,9 @@
 [
   {
-    "firstName": "neKārlis",
-    "lastName": "neDrande",
-    "schoolName": "neJelgavas 4. vidusskola",
-    "reason": "."
-  },
-  {
-    "firstName": "Edijs",
-    "lastName": "Kārklis",
-    "schoolName": "Jelgavas 4. vidusskola",
-    "reason": "."
+    "firstName": "*",
+    "lastName": "*",
+    "schoolName": "*",
+    "reason": "Z-Klase pašlaik nestrādā. Lūgums izmantot E-klases oficiālo lietotni, kamēr Z-klase nav salabota. Atvainojamies par neērtībām."
   },
   {
     "firstName": "Muris",
