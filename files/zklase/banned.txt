@@ -1,11 +1,5 @@
 [
   {
-    "firstName": "*",
-    "lastName": "*",
-    "schoolName": "*",
-    "reason": "Z-Klase pašlaik nestrādā. Lūgums izmantot E-klases oficiālo lietotni, kamēr Z-klase nav salabota. Atvainojamies par neērtībām."
-  },
-  {
     "firstName": "Muris",
     "lastName": "Bārdnieks",
     "schoolName": "Jelgavas 67. sākumskola",
