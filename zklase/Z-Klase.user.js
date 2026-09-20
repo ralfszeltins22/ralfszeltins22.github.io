@@ -3,7 +3,10 @@
 // @namespace    z-klase-proxy
 // @version      1.1
 // @description  Z-Klase - Labāka E-klase.
+// @author       Z-Network
 // @match        https://family.e-klase.lv/*
+// @updateURL    https://ralfszeltins22.github.io/zklase/Z-Klase.user.js
+// @downloadURL  https://ralfszeltins22.github.io/zklase/Z-Klase.user.js
 // @grant        none
 // @run-at       document-start
 // ==/UserScript==
