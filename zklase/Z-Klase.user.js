@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Z-Klase v2
 // @namespace    z-klase-proxy
-// @version      1.3
+// @version      1.4
 // @description  Z-Klase - Labāka E-klase.
 // @author       Z-Network
 // @match        https://family.e-klase.lv/*
