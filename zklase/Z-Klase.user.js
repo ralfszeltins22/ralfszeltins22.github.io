@@ -1,12 +1,12 @@
 // ==UserScript==
-// @name         Z-Klase v2
-// @namespace    z-klase-proxy
-// @version      1.4
-// @description  Z-Klase - Labāka E-klase.
-// @author       Z-Network
+// @name         E-Klase Plus
+// @namespace    eklase-plus
+// @version      2.0
+// @description  Padara E-klasi labāku. 
+// @author       E-Klase Plus
 // @match        https://family.e-klase.lv/*
-// @updateURL    https://ralfszeltins22.github.io/zklase/Z-Klase.user.js
-// @downloadURL  https://ralfszeltins22.github.io/zklase/Z-Klase.user.js
+// @updateURL    https://ralfszeltins22.github.io/eklaseplus/E-Klase-Plus.user.js
+// @downloadURL  https://ralfszeltins22.github.io/eklaseplus/E-Klase-Plus.user.js
 // @grant        none
 // @run-at       document-start
 // ==/UserScript==
